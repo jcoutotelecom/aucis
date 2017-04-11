@@ -1,6 +1,6 @@
 #! /bin/bash
-#Script para guardar configuraciones
-FECHA=$(date +%F)		
+#Aucis Backup script
+DATE=$(date +%F)		
 sshpass=/usr/bin/sshpass
 
 grep location aucis.conf | grep -v "#" | awk -F'=' '{print $2}' | awk -F' ' '{print $1}' | tr -d "\n" | tr -d "\r" > /home/tmp4
@@ -24,16 +24,16 @@ do
     eval '$sshpass -p ${SSHPASS} ssh -o StrictHostKeyChecking=no $USER@${line} "sh run"  >  /home/tmp1'
  	eval '$sshpass -p ${SSHPASS} ssh -o StrictHostKeyChecking=no $USER@${line} "sh vlan brief"  >  /home/tmp2'
 	HOSTNAME=$(cat /home/tmp1 | grep hostname | head -n 1 | cut -d ' ' -f2 | tr -d '\r')		
-	SALIDA=$HOSTNAME"_"$FECHA
+	SALIDA=$HOSTNAME"_"$DATE
 	
 	[ ! -d $BDIR ] && mkdir $BDIR
 	[ ! -d $BDIR/$HOSTNAME ] && mkdir $BDIR/$HOSTNAME
-	[ ! -d $BDIR/$HOSTNAME/$FECHA ] && mkdir $BDIR/$HOSTNAME/$FECHA
-	cp --backup=t /home/tmp1 $BDIR/$HOSTNAME/$FECHA/$HOSTNAME"(runningConfig).conf"
-	grep -qi Ambiguous /home/tmp2 || cp --backup=t /home/tmp2 $BDIR/$HOSTNAME/$FECHA/$HOSTNAME"(vlanBrief).conf"
+	[ ! -d $BDIR/$HOSTNAME/$DATE ] && mkdir $BDIR/$HOSTNAME/$DATE
+	cp --backup=t /home/tmp1 $BDIR/$HOSTNAME/$DATE/$HOSTNAME"(runningConfig).conf"
+	grep -qi Ambiguous /home/tmp2 || cp --backup=t /home/tmp2 $BDIR/$HOSTNAME/$DATE/$HOSTNAME"(vlanBrief).conf"
 	rm -f /home/tmp1
 	rm -f /home/tmp2
-	echo $FECHA: La configuracion de $HOSTNAME ha sido respaldada
+	echo $DATE: La configuracion de $HOSTNAME ha sido respaldada
 done
 
 rm -f /home/tmp0
