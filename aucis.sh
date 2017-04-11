@@ -15,7 +15,7 @@ grep defaultUser aucis.conf | grep -v "#" | awk -F'=' '{print $2}' | awk -F' ' '
 USER=$(cat /home/tmp4)
 rm -f /home/tmp4
 
-grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' /home/aucisDevices.conf --no-filename > /home/tmp0
+grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' /home/aucisDevices.list --no-filename > /home/tmp0
 
 IFS=$'\n'
 for line in $(cat /home/tmp0)          
