@@ -5,4 +5,6 @@ This program is created under MIT Licence, and use of a program called sshpass (
 
 In able to use aucis, you shoud install sshpass.
 
+This program is prepared to be scheduled on cron, and does not erase existing backups.
+
 
