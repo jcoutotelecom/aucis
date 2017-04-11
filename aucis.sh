@@ -33,7 +33,7 @@ do
 	grep -qi Ambiguous /home/tmp2 || cp --backup=t /home/tmp2 $BDIR/$HOSTNAME/$DATE/$HOSTNAME"(vlanBrief).conf"
 	rm -f /home/tmp1
 	rm -f /home/tmp2
-	echo $DATE: La configuracion de $HOSTNAME ha sido respaldada
+	echo $DATE: Config file of $HOSTNAME has been saved
 done
 
 rm -f /home/tmp0
